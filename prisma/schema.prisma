@@ -28,6 +28,9 @@ model Prospect {
   documents           Document[]
   status              String    @default("Enviado")
   rejectionObservations String?
+  created_at      DateTime      @default(now())
+  updated_at      DateTime      @default(now()) @updatedAt
+
 }
 
 model Document {
@@ -36,4 +39,6 @@ model Document {
   documentUrl  String
   prospectId  Int
   prospect    Prospect @relation(fields: [prospectId], references: [id])
+  created_at      DateTime      @default(now())
+  updated_at      DateTime      @default(now()) @updatedAt
 }

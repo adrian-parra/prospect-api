@@ -12,3 +12,28 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model Prospect {
+  id                  Int       @id @default(autoincrement())
+  firstName           String
+  lastName1           String
+  lastName2           String?
+  street              String
+  number              String
+  neighborhood        String
+  postalCode          String
+  phone               String
+  rfc                 String
+  documents           Document[]
+  status              String    @default("Enviado")
+  rejectionObservations String?
+}
+
+model Document {
+  id          Int      @id @default(autoincrement())
+  documentName String
+  documentUrl  String
+  prospectId  Int
+  prospect    Prospect @relation(fields: [prospectId], references: [id])
+}
